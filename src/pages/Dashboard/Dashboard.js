@@ -12,10 +12,15 @@ import axios from "axios";
 
 const Dashboard = () => {
 	const { dataList } = useSelector((rootReducers) => rootReducers);
+	const [id, setId] = useState(0);
 
+	console.log(id);
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const handleShow = (id) => {
+		setId(id);
+		setShow(true);
+	};
 
 	const dispatch = useDispatch();
 	console.log("data list", dataList);
@@ -32,6 +37,8 @@ const Dashboard = () => {
 		await axios.delete(`https://todo.api.devcode.gethired.id/activity-groups/${id}`).then((res) => {
 			console.log("delete berhasil");
 		});
+		await setShow(false);
+		await setId(null);
 		getListData();
 	};
 
@@ -67,7 +74,11 @@ const Dashboard = () => {
 											<h1>{item.created_at.substr(0, 10)}</h1>
 										</div>
 										<div className="col-1">
-											<button onClick={handleShow}>
+											<button
+												onClick={() => {
+													handleShow(item.id);
+												}}
+											>
 												<i class="bi bi-trash3"></i>
 											</button>
 										</div>
@@ -91,7 +102,12 @@ const Dashboard = () => {
 						<img className="ModalDeleteTitle" src={ModalDeleteTitle} alt="" />
 					</div>
 					<div className="button-container">
-						<Button variant="secondary">Batal</Button> <Button variant="danger">Hapus</Button>{" "}
+						<Button onClick={handleClose} variant="secondary">
+							Batal
+						</Button>{" "}
+						<Button onClick={() => handleDelete(id)} variant="danger">
+							Hapus
+						</Button>{" "}
 					</div>
 				</div>
 			</Modal>
