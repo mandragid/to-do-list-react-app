@@ -138,7 +138,6 @@ body {
 .activity-title h1 {
 	width: 145px;
 	height: 54px;
-	margin-left: 220px;
 	margin-top: 38px;
 	font-family: Poppins;
 	font-style: normal;
@@ -149,7 +148,6 @@ body {
 }
 
 .activity-add-button button {
-	margin-left: 220px;
 	margin-top: 38px;
 	display: flex;
 	flex-direction: row;
@@ -201,7 +199,7 @@ body {
 	width: 235px;
 	height: 234px;
 	padding: 16px;
-	margin: 20px;
+	margin: 16px;
 	background: #ffffff;
 	box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
 	border-radius: 12px;
@@ -213,4 +211,23 @@ body {
 
 .activity-item-container h1 {
 	font-size: 16px;
+}
+
+.delete-activity {
+	width: 490px;
+	height: 355px;
+	background: #ffffff;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 12px;
+	display: flex;
+	flex-wrap: wrap !important;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+}
+
+.image-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
 }
