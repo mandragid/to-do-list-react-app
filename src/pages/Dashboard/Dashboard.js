@@ -17,13 +17,15 @@ const Dashboard = () => {
 	console.log(id);
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
-	const handleShow = (id) => {
+	const [selectedItem, setSelectedItem] = useState("");
+	const dispatch = useDispatch();
+	console.log(selectedItem);
+
+	const handleShow = (id, judul) => {
 		setId(id);
 		setShow(true);
+		setSelectedItem(judul);
 	};
-
-	const dispatch = useDispatch();
-	console.log("data list", dataList);
 
 	const getListData = () => {
 		dispatch(getListAction());
@@ -76,7 +78,7 @@ const Dashboard = () => {
 										<div className="col-1">
 											<button
 												onClick={() => {
-													handleShow(item.id);
+													handleShow(item.id, item.title);
 												}}
 											>
 												<i class="bi bi-trash3"></i>
@@ -99,7 +101,7 @@ const Dashboard = () => {
 						<img className="ModalDeleteIcon" src={ModalDeleteIcon} alt="ModalDeleteIcon" />
 					</div>
 					<div className="title-container">
-						<img className="ModalDeleteTitle" src={ModalDeleteTitle} alt="" />
+						<h1>Apakah anda yakin menghapus activity “{selectedItem}”?</h1>
 					</div>
 					<div className="button-container">
 						<Button onClick={handleClose} variant="secondary">

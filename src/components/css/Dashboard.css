@@ -205,6 +205,11 @@ body {
 	border-radius: 12px;
 }
 
+.card-container button {
+	border: none;
+	background-color: transparent;
+}
+
 .card-container .row {
 	width: 100%;
 }
@@ -230,4 +235,12 @@ body {
 	width: 100%;
 	display: flex;
 	justify-content: center;
+}
+
+.title-container {
+	text-align: center;
+}
+
+.title-container h1 {
+	font-size: 28px;
 }
