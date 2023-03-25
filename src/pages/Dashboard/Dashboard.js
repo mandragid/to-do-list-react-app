@@ -9,6 +9,7 @@ import ModalDeleteTitle from "../../assets/img/modal-delete-title.png";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import { API } from "../../const/endpoint";
 
 const Dashboard = () => {
 	const { dataList } = useSelector((rootReducers) => rootReducers);
@@ -44,6 +45,17 @@ const Dashboard = () => {
 		getListData();
 	};
 
+	const handleAdd = () => {
+		axios
+			.post(API.AddList)
+			.then((res) => {
+				console.log("tambah berhasil");
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
+	};
+
 	return (
 		<div data-cy="dashboard-empty-state" className="container-fluid">
 			<Header />
@@ -52,7 +64,7 @@ const Dashboard = () => {
 					<h1 data-cy="activity-title">Activity</h1>
 				</div>
 				<div data-cy="activity-add-button" className="activity-add-button">
-					<button onClick={getListData}>
+					<button onClick={handleAdd}>
 						<span>
 							<i class="bi bi-plus"></i>
 						</span>
