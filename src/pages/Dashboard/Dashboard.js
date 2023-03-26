@@ -12,121 +12,132 @@ import axios from "axios";
 import { API } from "../../const/endpoint";
 
 const Dashboard = () => {
-	const { dataList } = useSelector((rootReducers) => rootReducers);
-	const [id, setId] = useState(0);
+  const { dataList } = useSelector((rootReducers) => rootReducers);
+  const [id, setId] = useState(0);
 
-	console.log(id);
-	const [show, setShow] = useState(false);
-	const handleClose = () => setShow(false);
-	const [selectedItem, setSelectedItem] = useState("");
-	const dispatch = useDispatch();
-	console.log(selectedItem);
+  console.log(id);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const [selectedItem, setSelectedItem] = useState("");
+  const dispatch = useDispatch();
+  console.log(selectedItem);
 
-	const handleShow = (id, judul) => {
-		setId(id);
-		setShow(true);
-		setSelectedItem(judul);
-	};
+  const handleShow = (id, judul) => {
+    setId(id);
+    setShow(true);
+    setSelectedItem(judul);
+  };
 
-	const getListData = () => {
-		dispatch(getListAction());
-	};
+  const getListData = () => {
+    dispatch(getListAction());
+  };
 
-	useEffect(() => {
-		getListData();
-	}, []);
+  useEffect(() => {
+    getListData();
+  }, []);
 
-	const handleDelete = async (id) => {
-		await axios.delete(`https://todo.api.devcode.gethired.id/activity-groups/${id}`).then((res) => {
-			console.log("delete berhasil");
-		});
-		await setShow(false);
-		await setId(null);
-		getListData();
-	};
+  const handleDelete = async (id) => {
+    await axios
+      .delete(`https://todo.api.devcode.gethired.id/activity-groups/${id}`)
+      .then((res) => {
+        console.log("delete berhasil");
+      });
+    await setShow(false);
+    await setId(null);
+    getListData();
+  };
 
-	const handleAdd = () => {
-		axios
-			.post(API.AddList)
-			.then((res) => {
-				console.log("tambah berhasil");
-			})
-			.catch((err) => {
-				console.log(err.message);
-			});
-	};
+  const handleAdd = async () => {
+    const payload = {
+      title: "New Activity",
+      email: "andreivanp@gmail.com",
+    };
+    await axios
+      .post(API.AddList, payload)
+      .then((res) => {
+        console.log("tambah berhasil");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+    getListData();
+  };
 
-	return (
-		<div data-cy="dashboard-empty-state" className="container-fluid">
-			<Header />
-			<div className="container d-flex justify-content-around">
-				<div data-cy="activity-title" className="activity-title">
-					<h1 data-cy="activity-title">Activity</h1>
-				</div>
-				<div data-cy="activity-add-button" className="activity-add-button">
-					<button onClick={handleAdd}>
-						<span>
-							<i class="bi bi-plus"></i>
-						</span>
-						<h1>Tambah</h1>
-					</button>
-				</div>
-			</div>
-			<div className="container d-flex justify-content-around">
-				<div className="activity-item-container">
-					{dataList.getList.length ? (
-						dataList.getList.map((item) => {
-							return (
-								<div className="card-container">
-									<div className="row">
-										<div className="col-12">
-											<h1>{item.title}</h1>
-										</div>
-									</div>
-									<div className="row">
-										<div className="col">
-											<h1>{item.created_at.substr(0, 10)}</h1>
-										</div>
-										<div className="col-1">
-											<button
-												onClick={() => {
-													handleShow(item.id, item.title);
-												}}
-											>
-												<i class="bi bi-trash3"></i>
-											</button>
-										</div>
-									</div>
-								</div>
-							);
-						})
-					) : (
-						<EmptyState />
-					)}
-				</div>
-			</div>
+  return (
+    <div data-cy="dashboard-empty-state" className="container-fluid">
+      <Header />
+      <div className="container d-flex justify-content-around">
+        <div data-cy="activity-title" className="activity-title">
+          <h1 data-cy="activity-title">Activity</h1>
+        </div>
+        <div data-cy="activity-add-button" className="activity-add-button">
+          <button onClick={handleAdd}>
+            <span>
+              <i class="bi bi-plus"></i>
+            </span>
+            <h1>Tambah</h1>
+          </button>
+        </div>
+      </div>
+      <div className="container d-flex justify-content-around">
+        <div className="activity-item-container">
+          {dataList.getList.length ? (
+            dataList.getList.map((item) => {
+              return (
+                <div className="card-container">
+                  <div className="row">
+                    <div className="col-12">
+                      <h1>{item.title}</h1>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col">
+                      <h1>{item.created_at.substr(0, 10)}</h1>
+                    </div>
+                    <div className="col-1">
+                      <button
+                        onClick={() => {
+                          handleShow(item.id, item.title);
+                        }}
+                      >
+                        <i class="bi bi-trash3"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <EmptyState />
+          )}
+        </div>
+      </div>
 
-			{/* modal */}
-			<Modal show={show} onHide={handleClose}>
-				<div data-cy="delete-activity" className="delete-activity">
-					<div className="image-container">
-						<img className="ModalDeleteIcon" src={ModalDeleteIcon} alt="ModalDeleteIcon" />
-					</div>
-					<div className="title-container">
-						<h1>Apakah anda yakin menghapus activity “{selectedItem}”?</h1>
-					</div>
-					<div className="button-container">
-						<Button onClick={handleClose} variant="secondary">
-							Batal
-						</Button>{" "}
-						<Button onClick={() => handleDelete(id)} variant="danger">
-							Hapus
-						</Button>{" "}
-					</div>
-				</div>
-			</Modal>
-		</div>
-	);
+      {/* modal */}
+      <Modal show={show} onHide={handleClose}>
+        <div data-cy="delete-activity" className="delete-activity">
+          <div className="image-container">
+            <img
+              className="ModalDeleteIcon"
+              src={ModalDeleteIcon}
+              alt="ModalDeleteIcon"
+            />
+          </div>
+          <div className="title-container">
+            <h1>Apakah anda yakin menghapus activity “{selectedItem}”?</h1>
+          </div>
+          <div className="button-container">
+            <Button onClick={handleClose} variant="secondary">
+              Batal
+            </Button>{" "}
+            <Button onClick={() => handleDelete(id)} variant="danger">
+              Hapus
+            </Button>{" "}
+          </div>
+        </div>
+      </Modal>
+    </div>
+  );
 };
 
 export default Dashboard;
