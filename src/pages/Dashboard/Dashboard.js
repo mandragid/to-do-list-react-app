@@ -77,11 +77,11 @@ const Dashboard = () => {
           <h1 data-cy="activity-title">Activity</h1>
         </div>
         <div data-cy="activity-add-button" className="activity-add-button">
-          <button onClick={handleAdd}>
+          <button data-cy="activity-add-button" onClick={handleAdd}>
             <span>
               <i class="bi bi-plus"></i>
             </span>
-            <h1>Tambah</h1>
+            <h1 data-cy="activity-add-button">Tambah</h1>
           </button>
         </div>
       </div>
