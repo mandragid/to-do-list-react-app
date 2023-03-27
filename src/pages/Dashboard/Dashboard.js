@@ -10,6 +10,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { API } from "../../const/endpoint";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { dataList } = useSelector((rootReducers) => rootReducers);
@@ -20,6 +21,7 @@ const Dashboard = () => {
   const handleClose = () => setShow(false);
   const [selectedItem, setSelectedItem] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   console.log(selectedItem);
 
   const handleShow = (id, judul) => {
@@ -63,6 +65,10 @@ const Dashboard = () => {
     getListData();
   };
 
+  const handleActivityDetail = () => {
+    navigate(`/detail/${id}`);
+  };
+
   return (
     <div data-cy="dashboard-empty-state" className="container-fluid">
       <Header />
@@ -85,11 +91,13 @@ const Dashboard = () => {
             dataList.getList.map((item) => {
               return (
                 <div className="card-container">
-                  <div className="row">
-                    <div className="col-12">
-                      <h1>{item.title}</h1>
+                  <Link to={`/detail/${item.id}`}>
+                    <div className="row">
+                      <div className="col-12">
+                        <h1>{item.title}</h1>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                   <div className="row">
                     <div className="col">
                       <h1>{item.created_at.substr(0, 10)}</h1>
@@ -108,7 +116,7 @@ const Dashboard = () => {
               );
             })
           ) : (
-            <EmptyState />
+            <EmptyState handleAdd={handleAdd} />
           )}
         </div>
       </div>
