@@ -142,9 +142,13 @@ const Dashboard = () => {
             data-cy="modal-delete-cancel-button"
             className="button-container"
           >
-            <Button onClick={handleClose} variant="secondary">
+            <button
+              data-cy="modal-delete-cancel-button"
+              onClick={handleClose}
+              variant="secondary"
+            >
               Batal
-            </Button>{" "}
+            </button>{" "}
             <Button
               data-cy="modal-delete-confirm-button"
               onClick={() => handleDelete(id)}
