@@ -106,7 +106,7 @@ const Dashboard = () => {
                     </div>
                     <div className="col-1">
                       <button
-                        data-cy="activity-item-title"
+                        data-cy="activity-item-delete-button"
                         onClick={() => {
                           handleShow(item.id, item.title);
                         }}
@@ -138,10 +138,7 @@ const Dashboard = () => {
           <div className="title-container">
             <h1>Apakah anda yakin menghapus activity “{selectedItem}”?</h1>
           </div>
-          <div
-            data-cy="modal-delete-cancel-button"
-            className="button-container"
-          >
+          <div className="button-container">
             <Button
               data-cy="modal-delete-cancel-button"
               onClick={handleClose}
