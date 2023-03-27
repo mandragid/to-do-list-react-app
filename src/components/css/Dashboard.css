@@ -212,8 +212,21 @@ body {
   color: black;
 }
 
+.title-container h1 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+}
+
 .activity-item-container h1 {
   font-size: 16px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
 }
 
 .delete-activity {
