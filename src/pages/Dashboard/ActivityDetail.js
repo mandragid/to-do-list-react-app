@@ -114,7 +114,7 @@ const ActivityDetail = () => {
     });
 
     await setShow(false);
-    await setAddListStatus(true);
+    await setAddListStatus(!addListStatus);
     getDetailedData();
   };
 
