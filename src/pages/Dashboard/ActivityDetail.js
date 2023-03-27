@@ -253,7 +253,7 @@ const ActivityDetail = () => {
                         id="category"
                       ></div>
                       <div className="list-name">
-                        <p data-cy="todo-item-title">{item.title}</p>
+                        <p data-cy="todo-title">{item.title}</p>
                       </div>
                       <div className="list-edit-button">
                         <button
