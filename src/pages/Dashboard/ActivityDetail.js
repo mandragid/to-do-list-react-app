@@ -204,7 +204,7 @@ const ActivityDetail = () => {
             <div className="right-section d-flex flex-wrap align-items-center">
               <div className="activity-sort-button">
                 <DropdownButton
-                  data-cy="todo-sort-button"
+                  data-cy="sort-selection"
                   id="dropdown-custom-button"
                   title=""
                 >
@@ -238,8 +238,8 @@ const ActivityDetail = () => {
                     className="list-container d-flex p-3"
                   >
                     <div className="left-section-list d-flex justify-content-start align-items-center ">
-                      <div className="checkbox">
-                        <Form data-cy="todo-item-checkbox">
+                      <div data-cy="todo-item-checkbox" className="checkbox">
+                        <Form>
                           {["checkbox"].map((type) => (
                             <div key={`default-${type}`} className="mb-3">
                               <Form.Check type={type} id={`default-${type}`} />
@@ -336,6 +336,7 @@ const ActivityDetail = () => {
             <span>
               <p data-cy="modal-add-priority-title">Priority</p>
               <Form.Select
+                data-cy="modal-add-priority-dropdown"
                 onChange={handlePriority}
                 aria-label="Default select example"
               >
