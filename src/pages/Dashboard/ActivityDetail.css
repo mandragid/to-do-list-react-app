@@ -1,8 +1,64 @@
 .add-item-modal {
-  border-radius: 12px;
-  padding: 16px;
+	border-radius: 12px;
+	padding: 16px;
 }
 
 .add-item-modal-header {
-  display: flex;
+	display: flex;
+}
+
+.activity-container {
+	margin-top: 24px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.activity-add-button button {
+	margin-top: 0px;
+}
+
+.activity-edit-button button {
+	background-color: transparent;
+	border: none;
+}
+
+#dropdown-custom-button {
+	background-image: url(../../assets/img/todo-sort-button.png);
+	background-color: transparent;
+	background-size: cover;
+	border: none;
+	width: 55px;
+	height: 55px;
+	margin-right: 12px;
+}
+
+.dropdown-toggle::after {
+	display: none;
+}
+
+.list-container {
+	margin-top: 24px;
+	box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 12px;
+	width: 800px;
+	height: 80px;
+}
+
+.label-indicator {
+	background-color: aqua;
+	border-radius: 180px;
+	width: 18px;
+	height: 18px;
+}
+
+.left-section-list {
+	width: 400px;
+}
+.right-section-list {
+	width: 400px;
+}
+.right-section-list a {
+	text-decoration: none;
+	background-color: transparent;
 }
