@@ -76,12 +76,12 @@ const Dashboard = () => {
         <div data-cy="activity-title" className="activity-title">
           <h1 data-cy="activity-title">Activity</h1>
         </div>
-        <div data-cy="activity-add-button" className="activity-add-button">
+        <div className="activity-add-button">
           <Button data-cy="activity-add-button" onClick={handleAdd}>
             <span>
               <i class="bi bi-plus"></i>
             </span>
-            <h1 data-cy="activity-add-button">Tambah</h1>
+            <h1>Tambah</h1>
           </Button>
         </div>
       </div>
