@@ -146,7 +146,7 @@ const Dashboard = () => {
               Batal
             </Button>{" "}
             <Button
-              data-cy="modal-delete-confirm-button"
+              data-cy="activity-item-delete-button"
               onClick={() => handleDelete(id)}
               variant="danger"
             >
