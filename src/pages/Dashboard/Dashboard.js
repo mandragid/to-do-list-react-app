@@ -138,12 +138,11 @@ const Dashboard = () => {
           <div className="title-container">
             <h1>Apakah anda yakin menghapus activity “{selectedItem}”?</h1>
           </div>
-          <div className="button-container">
-            <Button
-              data-cy="modal-delete-cancel-button"
-              onClick={handleClose}
-              variant="secondary"
-            >
+          <div
+            data-cy="modal-delete-cancel-button"
+            className="button-container"
+          >
+            <Button onClick={handleClose} variant="secondary">
               Batal
             </Button>{" "}
             <Button
