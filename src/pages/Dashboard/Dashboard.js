@@ -104,9 +104,9 @@ const Dashboard = () => {
                         {item.created_at.substr(0, 10)}
                       </h1>
                     </div>
-                    <div data-cy="modal-delete" className="col-1 ">
+                    <div className="col-1">
                       <button
-                        data-cy="activity-item-delete-button"
+                        data-cy="modal-delete"
                         onClick={() => {
                           handleShow(item.id, item.title);
                         }}
@@ -138,14 +138,19 @@ const Dashboard = () => {
           <div className="title-container">
             <h1>Apakah anda yakin menghapus activity “{selectedItem}”?</h1>
           </div>
-          <div
-            data-cy="modal-delete-cancel-button"
-            className="button-container"
-          >
-            <Button onClick={handleClose} variant="secondary">
+          <div className="button-container">
+            <Button
+              data-cy="modal-delete-cancel-button"
+              onClick={handleClose}
+              variant="secondary"
+            >
               Batal
             </Button>{" "}
-            <Button onClick={() => handleDelete(id)} variant="danger">
+            <Button
+              data-cy="modal-delete-confirm-button"
+              onClick={() => handleDelete(id)}
+              variant="danger"
+            >
               Hapus
             </Button>{" "}
           </div>
