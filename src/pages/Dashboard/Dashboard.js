@@ -90,8 +90,8 @@ const Dashboard = () => {
           {dataList.getList.length ? (
             dataList.getList.map((item) => {
               return (
-                <div data-cy="activity-item" className="card-container">
-                  <Link to={`/detail/${item.id}`}>
+                <div className="card-container">
+                  <Link data-cy="activity-item" to={`/detail/${item.id}`}>
                     <div className="row">
                       <div className="col-12">
                         <h1 data-cy="activity-item-title">{item.title}</h1>
@@ -126,7 +126,7 @@ const Dashboard = () => {
 
       {/* Delete modal */}
       <Modal show={show} onHide={handleClose}>
-        <div data-cy="delete-activity" className="delete-activity">
+        <div data-cy="todo-modal-delete" className="delete-activity">
           <div className="image-container">
             <img
               data-cy="modal-delete-icon"
@@ -138,12 +138,11 @@ const Dashboard = () => {
           <div className="title-container">
             <h1>Apakah anda yakin menghapus activity “{selectedItem}”?</h1>
           </div>
-          <div className="button-container">
-            <Button
-              data-cy="modal-delete-cancel-button"
-              onClick={handleClose}
-              variant="secondary"
-            >
+          <div
+            data-cy="modal-delete-cancel-button"
+            className="button-container"
+          >
+            <Button onClick={handleClose} variant="secondary">
               Batal
             </Button>{" "}
             <Button
