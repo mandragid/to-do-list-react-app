@@ -106,7 +106,7 @@ const Dashboard = () => {
                     </div>
                     <div className="col-1">
                       <button
-                        data-cy="activity-item-delete-button"
+                        data-cy="modal-delete"
                         onClick={() => {
                           handleShow(item.id, item.title);
                         }}
