@@ -94,8 +94,8 @@ const Dashboard = () => {
 					{dataList.getList.length ? (
 						dataList.getList.map((item) => {
 							return (
-								<div data-cy="activity-item" className="card-container">
-									<Link to={`/detail/${item.id}`}>
+								<div className="card-container">
+									<Link data-cy="activity-item" to={`/detail/${item.id}`}>
 										<div className="row">
 											<div className="col-12">
 												<h1 data-cy="activity-item-title">{item.title}</h1>
@@ -108,7 +108,7 @@ const Dashboard = () => {
 										</div>
 										<div className="col-1">
 											<button
-												data-cy="activity-item-delete-button"
+												data-cy="modal-delete"
 												onClick={() => {
 													handleShow(item.id, item.title);
 												}}

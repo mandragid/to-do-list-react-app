@@ -201,8 +201,8 @@ const ActivityDetail = () => {
 								</DropdownButton>
 							</div>
 							<div className="activity-add-button">
-								<div className="activity-add-button">
-									<button data-cy="todo-add-button" onClick={handleShow}>
+								<div data-cy="todo-add-button" className="activity-add-button">
+									<button onClick={handleShow}>
 										<span>
 											<i class="bi bi-plus"></i>
 										</span>
