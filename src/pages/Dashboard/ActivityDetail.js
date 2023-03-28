@@ -32,6 +32,7 @@ const ActivityDetail = () => {
 	const [listId, setListId] = useState(0);
 	const [addListStatus, setAddListStatus] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
+	const placeholder = localStorage.getItem("placeholder");
 
 	const handleEditClick = () => {
 		setIsEditClicked(!isEditClicked);
@@ -141,7 +142,7 @@ const ActivityDetail = () => {
 			.get(`https://todo.api.devcode.gethired.id/activity-groups/${id}`)
 			.then((res) => {
 				setActivityDetail(res.data);
-				setName(res.data.title);
+				localStorage.setItem("placeholder", res.data.title);
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -177,7 +178,7 @@ const ActivityDetail = () => {
 											<div>
 												<Form onChange={handleChange}>
 													<Form.Group className="mb-3" controlId="formBasicEmail">
-														<Form.Control type="text" placeholder={name} defaultValue={name} />
+														<Form.Control type="text" placeholder={placeholder} defaultValue={placeholder} />
 													</Form.Group>
 												</Form>
 											</div>
