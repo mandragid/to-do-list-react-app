@@ -7,7 +7,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import BackIcon from "../../assets/img/todo-back-button.png";
 import ToDoIcon from "../../assets/img/todo-empty-state.png";
-import EditTitleForm from "../../components/EditTitleForm";
+
 import { Link } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -24,6 +24,7 @@ const ActivityDetail = () => {
 	const [showEdit, setShowEdit] = useState(false);
 	const [deleteShow, setDeleteShow] = useState(false);
 	const [name, setName] = useState("");
+	console.log("nama", name);
 	const [priority, setPriority] = useState("");
 	const [itemList, setItemList] = useState([]);
 	const [showDelete, setShowDelete] = useState(false);
@@ -31,9 +32,6 @@ const ActivityDetail = () => {
 	const [listId, setListId] = useState(0);
 	const [addListStatus, setAddListStatus] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
-	console.log("isChecked", isChecked);
-
-	console.log("itemlist", itemList);
 
 	const handleEditClick = () => {
 		setIsEditClicked(!isEditClicked);
@@ -143,6 +141,7 @@ const ActivityDetail = () => {
 			.get(`https://todo.api.devcode.gethired.id/activity-groups/${id}`)
 			.then((res) => {
 				setActivityDetail(res.data);
+				setName(res.data.title);
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -178,7 +177,7 @@ const ActivityDetail = () => {
 											<div>
 												<Form onChange={handleChange}>
 													<Form.Group className="mb-3" controlId="formBasicEmail">
-														<Form.Control type="text" placeholder={name} />
+														<Form.Control type="text" placeholder={name} defaultValue={name} />
 													</Form.Group>
 												</Form>
 											</div>
@@ -200,7 +199,9 @@ const ActivityDetail = () => {
 												<img src={BackIcon} alt="back-icon" />
 											</Link>
 										</div>
-										<h3 data-cy="todo-title">{activityDetail.title}</h3>
+										<h3 onClick={handleEditClick} data-cy="todo-title">
+											{activityDetail.title}
+										</h3>
 										<div className="activity-edit-button">
 											<div>
 												<button data-cy="todo-title-edit-button" onClick={handleEditClick}>
