@@ -94,8 +94,8 @@ const Dashboard = () => {
 					{dataList.getList.length ? (
 						dataList.getList.map((item) => {
 							return (
-								<div className="card-container">
-									<Link data-cy="activity-item" to={`/detail/${item.id}`}>
+								<div data-cy="activity-item" className="card-container">
+									<Link to={`/detail/${item.id}`}>
 										<div className="row">
 											<div className="col-12">
 												<h1 data-cy="activity-item-title">{item.title}</h1>
@@ -108,7 +108,7 @@ const Dashboard = () => {
 										</div>
 										<div className="col-1">
 											<button
-												data-cy="modal-delete"
+												data-cy="activity-item-delete-button"
 												onClick={() => {
 													handleShow(item.id, item.title);
 												}}
@@ -151,7 +151,7 @@ const Dashboard = () => {
 			<Modal show={showSuccessAlert} onHide={handleClose}>
 				<div data-cy="modal-information" className="modal-delete-success d-flex justify-content-center align-items-center p-3">
 					<div data-cy="modal-information-icon" className="modal-delete-success-image">
-						<img data-cy="modal-delete-icon" className="ModalDeleteIcon" src={ModalDeleteSuccessIcon} alt="ModalDeleteIcon" />
+						<img className="ModalDeleteIcon" src={ModalDeleteSuccessIcon} alt="ModalDeleteIcon" />
 					</div>
 					<div className="modal-delete-success-title">
 						<p data-cy="modal-information-title">“{selectedItem}” berhasil dihapus.</p>
