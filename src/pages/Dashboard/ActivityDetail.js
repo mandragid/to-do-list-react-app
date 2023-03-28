@@ -123,6 +123,17 @@ const ActivityDetail = () => {
 		getDetailedData();
 	};
 
+	const handleChange = async (e) => {
+		const title = e.target.value;
+
+		const payload = {
+			title: title,
+		};
+
+		await axios.patch(`https://todo.api.devcode.gethired.id/activity-groups/${id}`, payload);
+		getDetailedData();
+	};
+
 	useEffect(() => {
 		getDetailedData();
 	}, [addListStatus]);
@@ -164,7 +175,13 @@ const ActivityDetail = () => {
 											</Link>
 										</div>
 										<h3 data-cy="activity-title">
-											<EditTitleForm placeholder={activityDetail.title} />
+											<div>
+												<Form onChange={handleChange}>
+													<Form.Group className="mb-3" controlId="formBasicEmail">
+														<Form.Control type="text" placeholder={name} />
+													</Form.Group>
+												</Form>
+											</div>
 										</h3>
 										<div className="activity-edit-button">
 											<div>
@@ -246,8 +263,8 @@ const ActivityDetail = () => {
 											</div>
 										</div>
 										<div className="right-section-list d-flex justify-content-end align-items-center ">
-											<button data-cy="todo-item-delete-button" onClick={() => handleDeleteShow(item.id, item.title)} href="">
-												<i class="bi bi-trash-fill"></i>
+											<button onClick={() => handleDeleteShow(item.id, item.title)} href="">
+												<i data-cy="todo-item-delete-button" class="bi bi-trash-fill"></i>
 											</button>
 										</div>
 									</div>
@@ -305,15 +322,17 @@ const ActivityDetail = () => {
 						</Form>
 						<span>
 							<p data-cy="modal-add-priority-title">Priority</p>
-							<Form.Select data-cy="modal-add-priority-dropdown" onChange={handlePriority}>
-								<option defaultValue={priority} value="very-high">
-									Very High
-								</option>
-								<option value="high">High</option>
-								<option value="normal">Medium</option>
-								<option value="low">Low</option>
-								<option value="very-low">Very Low</option>
-							</Form.Select>
+							<div data-cy="modal-add-priority-dropdown">
+								<Form.Select onChange={handlePriority}>
+									<option defaultValue={priority} value="very-high">
+										Very High
+									</option>
+									<option value="high">High</option>
+									<option value="normal">Medium</option>
+									<option value="low">Low</option>
+									<option value="very-low">Very Low</option>
+								</Form.Select>
+							</div>
 						</span>
 					</div>
 					<div className="add-item-modal-button mt-3 d-flex justify-content-end">
