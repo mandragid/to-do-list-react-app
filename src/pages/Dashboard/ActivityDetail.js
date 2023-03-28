@@ -323,15 +323,23 @@ const ActivityDetail = () => {
 						</Form>
 						<span>
 							<p data-cy="modal-add-priority-title">Priority</p>
-							<div data-cy="modal-add-priority-item">
+							<div data-cy="modal-add-priority-dropdown">
 								<Form.Select onChange={handlePriority}>
-									<option defaultValue={priority} value="very-high">
+									<option data-cy="modal-add-priority-item" defaultValue={priority} value="very-high">
 										Very High
 									</option>
-									<option value="high">High</option>
-									<option value="normal">Medium</option>
-									<option value="low">Low</option>
-									<option value="very-low">Very Low</option>
+									<option data-cy="modal-add-priority-item" value="high">
+										High
+									</option>
+									<option data-cy="modal-add-priority-item" value="normal">
+										Medium
+									</option>
+									<option data-cy="modal-add-priority-item" value="low">
+										Low
+									</option>
+									<option data-cy="modal-add-priority-item" value="very-low">
+										Very Low
+									</option>
 								</Form.Select>
 							</div>
 						</span>
