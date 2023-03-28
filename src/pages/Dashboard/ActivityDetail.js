@@ -18,13 +18,11 @@ import ModalDeleteIcon from "../../assets/img/modal-delete-icon.png";
 
 const ActivityDetail = () => {
 	const { id } = useParams();
-	console.log("ID aktifitas", id);
 	const [activityDetail, setActivityDetail] = useState([]);
 	const [isEditClicked, setIsEditClicked] = useState(false);
 	const [show, setShow] = useState(false);
 	const [showEdit, setShowEdit] = useState(false);
 	const [deleteShow, setDeleteShow] = useState(false);
-
 	const [name, setName] = useState("");
 	const [priority, setPriority] = useState("");
 	const [itemList, setItemList] = useState([]);
@@ -32,6 +30,8 @@ const ActivityDetail = () => {
 	const [selectedItem, setSelectedItem] = useState("");
 	const [listId, setListId] = useState(0);
 	const [addListStatus, setAddListStatus] = useState(false);
+	const [isChecked, setIsChecked] = useState(false);
+	console.log("isChecked", isChecked);
 
 	console.log("itemlist", itemList);
 
@@ -67,6 +67,10 @@ const ActivityDetail = () => {
 
 	const handlePriority = (e) => {
 		setPriority(e.target.value);
+	};
+
+	const handleCheckBox = () => {
+		setIsChecked(!isChecked);
 	};
 
 	const handleEditList = async (id) => {
@@ -115,6 +119,7 @@ const ActivityDetail = () => {
 
 		await setShow(false);
 		await setAddListStatus(!addListStatus);
+		await setName("");
 		getDetailedData();
 	};
 
@@ -136,6 +141,7 @@ const ActivityDetail = () => {
 			.get(`https://todo.api.devcode.gethired.id/todo-items?activity_group_id=${id}`)
 			.then((res) => {
 				setItemList(res.data.data);
+				setPriority(res.data.data.priority);
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -177,7 +183,7 @@ const ActivityDetail = () => {
 												<img src={BackIcon} alt="back-icon" />
 											</Link>
 										</div>
-										<h3 data-cy="activity-title">{activityDetail.title}</h3>
+										<h3 data-cy="todo-title">{activityDetail.title}</h3>
 										<div className="activity-edit-button">
 											<div>
 												<button data-cy="todo-title-edit-button" onClick={handleEditClick}>
@@ -221,7 +227,7 @@ const ActivityDetail = () => {
 									<div data-cy="todo-item" className="list-container d-flex p-3">
 										<div className="left-section-list d-flex justify-content-start align-items-center ">
 											<div data-cy="todo-item-checkbox" className="checkbox">
-												<Form>
+												<Form onChange={handleCheckBox}>
 													{["checkbox"].map((type) => (
 														<div key={`default-${type}`} className="mb-3">
 															<Form.Check type={type} id={`default-${type}`} />
@@ -299,9 +305,10 @@ const ActivityDetail = () => {
 						</Form>
 						<span>
 							<p data-cy="modal-add-priority-title">Priority</p>
-							<Form.Select data-cy="modal-add-priority-dropdown" onChange={handlePriority} aria-label="Default select example">
-								<option>Select Priority</option>
-								<option value="very-high">Very High</option>
+							<Form.Select data-cy="modal-add-priority-dropdown" onChange={handlePriority}>
+								<option defaultValue={priority} value="very-high">
+									Very High
+								</option>
 								<option value="high">High</option>
 								<option value="normal">Medium</option>
 								<option value="low">Low</option>
@@ -310,9 +317,15 @@ const ActivityDetail = () => {
 						</span>
 					</div>
 					<div className="add-item-modal-button mt-3 d-flex justify-content-end">
-						<Button data-cy="modal-add-save-button" onClick={handleAddList} variant="primary">
-							Simpan
-						</Button>
+						{!!name.length ? (
+							<Button data-cy="modal-add-save-button" onClick={handleAddList} variant="primary">
+								Simpan
+							</Button>
+						) : (
+							<Button data-cy="modal-add-save-button" onClick={handleAddList} variant="primary" disabled>
+								Simpan
+							</Button>
+						)}
 					</div>
 				</div>
 			</Modal>
@@ -353,9 +366,9 @@ const ActivityDetail = () => {
 						</span>
 					</div>
 					<div className="add-item-modal-button mt-3 d-flex justify-content-end">
-						<Button onClick={() => handleEditList(listId)} variant="primary">
+						<button type="button" class="btn btn-lg btn-primary" onClick={() => handleEditList(listId)} disabled>
 							Simpan
-						</Button>
+						</button>
 					</div>
 				</div>
 			</Modal>
