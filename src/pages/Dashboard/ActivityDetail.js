@@ -220,12 +220,22 @@ const ActivityDetail = () => {
 
 						<div className="right-section d-flex flex-wrap align-items-center">
 							<div className="activity-sort-button">
-								<DropdownButton data-cy="sort-selection" id="dropdown-custom-button" title="">
-									<Dropdown.Item href="#/action-1">Terbaru</Dropdown.Item>
-									<Dropdown.Item href="#/action-2">Terlama</Dropdown.Item>
-									<Dropdown.Item href="#/action-3">A-Z</Dropdown.Item>
-									<Dropdown.Item href="#/action-3">Z-A</Dropdown.Item>
-									<Dropdown.Item href="#/action-3">Belum Selesai</Dropdown.Item>
+								<DropdownButton data-cy="todo-sort-button" id="dropdown-custom-button" title="">
+									<Dropdown.Item data-cy="sort-selection" href="#/action-1">
+										Terbaru
+									</Dropdown.Item>
+									<Dropdown.Item data-cy="sort-selection" href="#/action-2">
+										Terlama
+									</Dropdown.Item>
+									<Dropdown.Item data-cy="sort-selection" href="#/action-3">
+										A-Z
+									</Dropdown.Item>
+									<Dropdown.Item data-cy="sort-selection" href="#/action-3">
+										Z-A
+									</Dropdown.Item>
+									<Dropdown.Item data-cy="sort-selection" href="#/action-3">
+										Belum Selesai
+									</Dropdown.Item>
 								</DropdownButton>
 							</div>
 							<div className="activity-add-button">
