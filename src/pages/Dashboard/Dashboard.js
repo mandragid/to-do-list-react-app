@@ -139,7 +139,7 @@ const Dashboard = () => {
 						<Button data-cy="modal-delete-cancel-button" onClick={handleClose} variant="secondary">
 							Batal
 						</Button>{" "}
-						<Button data-cy="activity-item-delete-button" onClick={() => handleDelete(id)} variant="danger">
+						<Button data-cy="modal-delete-confirm-button" onClick={() => handleDelete(id)} variant="danger">
 							Hapus
 						</Button>{" "}
 					</div>
