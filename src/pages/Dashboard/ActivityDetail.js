@@ -31,7 +31,8 @@ const ActivityDetail = () => {
 	const [selectedItem, setSelectedItem] = useState("");
 	const [listId, setListId] = useState(0);
 	const [addListStatus, setAddListStatus] = useState(false);
-	const [isChecked, setIsChecked] = useState(false);
+	const [isChecked, setIsChecked] = useState(1);
+	console.log(isChecked);
 	const placeholder = localStorage.getItem("placeholder");
 	const [showSuccessAlertItem, setShowSuccessAlertItem] = useState(false);
 
@@ -68,10 +69,6 @@ const ActivityDetail = () => {
 
 	const handlePriority = (e) => {
 		setPriority(e.target.value);
-	};
-
-	const handleCheckBox = () => {
-		setIsChecked(!isChecked);
 	};
 
 	const handleEditList = async (id) => {
@@ -136,6 +133,15 @@ const ActivityDetail = () => {
 		getDetailedData();
 	};
 
+	const handleCheck = (id) => {
+		setIsChecked(0);
+		const payload = {
+			is_active: isChecked,
+		};
+
+		axios.patch(`https://todo.api.devcode.gethired.id/todo-items/${id}`, payload);
+	};
+
 	useEffect(() => {
 		getDetailedData();
 	}, [addListStatus]);
@@ -156,6 +162,7 @@ const ActivityDetail = () => {
 			.then((res) => {
 				setItemList(res.data.data);
 				setPriority(res.data.data.priority);
+				console.log(res);
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -259,13 +266,7 @@ const ActivityDetail = () => {
 									<div data-cy="todo-item" className="list-container d-flex p-3">
 										<div className="left-section-list d-flex justify-content-start align-items-center ">
 											<div data-cy="todo-item-checkbox" className="checkbox">
-												<Form onChange={handleCheckBox}>
-													{["checkbox"].map((type) => (
-														<div key={`default-${type}`} className="mb-3">
-															<Form.Check type={type} id={`default-${type}`} />
-														</div>
-													))}
-												</Form>
+												<input onChange={() => handleCheck(item.id)} type="checkbox"></input>
 											</div>
 											<div data-cy="todo-item-priority-indicator" className={item.priority} id="category"></div>
 											<div className="list-name">
