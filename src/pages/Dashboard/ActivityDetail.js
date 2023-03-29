@@ -15,6 +15,8 @@ import "../Dashboard/ActivityDetail.css";
 import Form from "react-bootstrap/Form";
 import { API } from "../../const/endpoint";
 import ModalDeleteIcon from "../../assets/img/modal-delete-icon.png";
+import React from "react";
+import Select from "react-select";
 
 const ActivityDetail = () => {
 	const { id } = useParams();
@@ -36,6 +38,37 @@ const ActivityDetail = () => {
 	console.log(isChecked);
 	const placeholder = localStorage.getItem("placeholder");
 	const [showSuccessAlertItem, setShowSuccessAlertItem] = useState(false);
+
+	// react select
+
+	const priorityData = [
+		{
+			value: "very-high",
+			label: "Very High",
+		},
+		{
+			value: "high",
+			label: "High",
+		},
+		{
+			value: "normal",
+			label: "Medium",
+		},
+		{
+			value: "low",
+			label: "Low",
+		},
+		{
+			value: "very-low",
+			label: "Very Low",
+		},
+	];
+
+	const labelData = ({ value, label }) => (
+		<div data-cy="modal-add-priority-item">
+			<div>{label}</div>
+		</div>
+	);
 
 	const handleDeleteShow = (id, listname) => {
 		setListId(id);
@@ -341,35 +374,7 @@ const ActivityDetail = () => {
 						<span>
 							<p data-cy="modal-add-priority-title">Priority</p>
 							<div data-cy="modal-add-priority-dropdown">
-								<Form.Select onChange={handlePriority}>
-									<option defaultValue={priority} value="very-high">
-										<div>
-											<span className="span-option" data-cy="modal-add-priority-item">
-												Very High
-											</span>
-										</div>
-									</option>
-									<option value="high">
-										<span className="span-option" data-cy="modal-add-priority-item">
-											High
-										</span>
-									</option>
-									<option value="normal">
-										<span className="span-option" data-cy="modal-add-priority-item">
-											Medium
-										</span>
-									</option>
-									<option value="low">
-										<span className="span-option" data-cy="modal-add-priority-item">
-											Low
-										</span>
-									</option>
-									<option value="very-low">
-										<span className="span-option" data-cy="modal-add-priority-item">
-											Very Low
-										</span>
-									</option>
-								</Form.Select>
+								<Select onChange={(e) => setPriority(e.value)} options={priorityData} formatOptionLabel={labelData} />
 							</div>
 						</span>
 					</div>
@@ -412,13 +417,7 @@ const ActivityDetail = () => {
 						</Form>
 						<span>
 							<p>Priority</p>
-							<Form.Select onChange={handlePriority} aria-label="Default select example">
-								<option value="very-high">Very High</option>
-								<option value="high">High</option>
-								<option value="normal">Medium</option>
-								<option value="low">Low</option>
-								<option value="very-low">Very Low</option>
-							</Form.Select>
+							<Select onChange={(e) => setPriority(e.value)} options={priorityData} formatOptionLabel={labelData} />
 						</span>
 					</div>
 					<div className="add-item-modal-button mt-3 d-flex justify-content-end">
