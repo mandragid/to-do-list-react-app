@@ -80,7 +80,7 @@ const Dashboard = () => {
 				<div data-cy="activity-title" className="activity-title">
 					<h1 data-cy="activity-title">Activity</h1>
 				</div>
-				<div className="activity-add-button">
+				<div className="activity-add-button button-aktifitas">
 					<Button data-cy="activity-add-button" onClick={handleAdd}>
 						<span>
 							<i class="bi bi-plus"></i>

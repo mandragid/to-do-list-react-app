@@ -31,14 +31,11 @@ const ActivityDetail = () => {
 	const [selectedItem, setSelectedItem] = useState("");
 	const [listId, setListId] = useState(0);
 	const [addListStatus, setAddListStatus] = useState(false);
+	const [editNameStatus, seteditNameStatus] = useState(false);
 	const [isChecked, setIsChecked] = useState(1);
 	console.log(isChecked);
 	const placeholder = localStorage.getItem("placeholder");
 	const [showSuccessAlertItem, setShowSuccessAlertItem] = useState(false);
-
-	const handleEditClick = () => {
-		setIsEditClicked(!isEditClicked);
-	};
 
 	const handleDeleteShow = (id, listname) => {
 		setListId(id);
@@ -122,14 +119,19 @@ const ActivityDetail = () => {
 		getDetailedData();
 	};
 
-	const handleChange = async (e) => {
-		const title = e.target.value;
+	const handleChangeName = async (e) => {
+		setName(e.target.value);
+		localStorage.setItem("placeholder", e.target.value);
+	};
 
+	const handleEditClick = async () => {
+		await setIsEditClicked(!isEditClicked);
 		const payload = {
-			title: title,
+			title: name,
 		};
-
-		await axios.patch(`https://todo.api.devcode.gethired.id/activity-groups/${id}`, payload);
+		axios.patch(`https://todo.api.devcode.gethired.id/activity-groups/${id}`, payload).then((res) => {
+			seteditNameStatus(!editNameStatus);
+		});
 		getDetailedData();
 	};
 
@@ -144,14 +146,14 @@ const ActivityDetail = () => {
 
 	useEffect(() => {
 		getDetailedData();
-	}, [addListStatus]);
+	}, [addListStatus, editNameStatus]);
 
 	const getDetailedData = () => {
 		axios
 			.get(`https://todo.api.devcode.gethired.id/activity-groups/${id}`)
 			.then((res) => {
 				setActivityDetail(res.data);
-				localStorage.setItem("placeholder", res.data.title);
+				setName(res.data.title);
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -186,9 +188,9 @@ const ActivityDetail = () => {
 										</div>
 										<h3 data-cy="activity-title">
 											<div>
-												<Form onChange={handleChange}>
+												<Form onChange={handleChangeName}>
 													<Form.Group className="mb-3" controlId="formBasicEmail">
-														<Form.Control type="text" placeholder={placeholder} defaultValue={placeholder} />
+														<Form.Control type="text" placeholder={name} defaultValue={name} />
 													</Form.Group>
 												</Form>
 											</div>
@@ -375,7 +377,7 @@ const ActivityDetail = () => {
 			{/* end of modal add */}
 
 			{/* modal edit list */}
-			<Modal data-cy="modal-information" show={showEdit} onHide={handleClose}>
+			<Modal show={showEdit} onHide={handleClose}>
 				<div className="add-item-modal">
 					<div className="add-item-modal-header">
 						<span>
@@ -399,7 +401,6 @@ const ActivityDetail = () => {
 						<span>
 							<p>Priority</p>
 							<Form.Select onChange={handlePriority} aria-label="Default select example">
-								<option>Select Priority</option>
 								<option value="very-high">Very High</option>
 								<option value="high">High</option>
 								<option value="normal">Medium</option>
@@ -409,7 +410,7 @@ const ActivityDetail = () => {
 						</span>
 					</div>
 					<div className="add-item-modal-button mt-3 d-flex justify-content-end">
-						<button type="button" class="btn btn-lg btn-primary" onClick={() => handleEditList(listId)} disabled>
+						<button type="button" class="btn btn-lg btn-primary" onClick={() => handleEditList(listId)}>
 							Simpan
 						</button>
 					</div>
