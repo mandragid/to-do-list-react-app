@@ -7,7 +7,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import BackIcon from "../../assets/img/todo-back-button.png";
 import ToDoIcon from "../../assets/img/todo-empty-state.png";
-
+import ModalDeleteSuccessIcon from "../../assets/img/modal-information-icon.png";
 import { Link } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -33,6 +33,7 @@ const ActivityDetail = () => {
 	const [addListStatus, setAddListStatus] = useState(false);
 	const [isChecked, setIsChecked] = useState(false);
 	const placeholder = localStorage.getItem("placeholder");
+	const [showSuccessAlertItem, setShowSuccessAlertItem] = useState(false);
 
 	const handleEditClick = () => {
 		setIsEditClicked(!isEditClicked);
@@ -58,6 +59,7 @@ const ActivityDetail = () => {
 		setShow(false);
 		setDeleteShow(false);
 		setShowEdit(false);
+		setShowSuccessAlertItem(false);
 	};
 
 	const handleAddName = (e) => {
@@ -102,6 +104,7 @@ const ActivityDetail = () => {
 			});
 		await setShow(false);
 		await setDeleteShow(false);
+		await setShowSuccessAlertItem(!showSuccessAlertItem);
 		getDetailedData();
 	};
 
@@ -402,6 +405,19 @@ const ActivityDetail = () => {
 				</div>
 			</Modal>
 			{/* end of modal edit list  */}
+
+			{/* Delete success modal */}
+			<Modal show={showSuccessAlertItem} onHide={handleClose}>
+				<div data-cy="modal-information" className="modal-delete-success d-flex justify-content-center align-items-center p-3">
+					<div data-cy="modal-information-icon" className="modal-delete-success-image">
+						<img className="ModalDeleteIcon" src={ModalDeleteSuccessIcon} alt="ModalDeleteIcon" />
+					</div>
+					<div className="modal-delete-success-title">
+						<p data-cy="modal-information-title">“{selectedItem}” berhasil dihapus.</p>
+					</div>
+				</div>
+			</Modal>
+			{/* Delete success modal */}
 		</div>
 	);
 };
