@@ -265,8 +265,8 @@ const ActivityDetail = () => {
 											</div>
 										</div>
 										<div className="right-section-list d-flex justify-content-end align-items-center ">
-											<button onClick={() => handleDeleteShow(item.id, item.title)} href="">
-												<i data-cy="todo-item-delete-button" class="bi bi-trash-fill"></i>
+											<button data-cy="todo-item-delete-button" onClick={() => handleDeleteShow(item.id, item.title)} href="">
+												<i class="bi bi-trash-fill"></i>
 											</button>
 										</div>
 									</div>
