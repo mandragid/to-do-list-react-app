@@ -26,6 +26,7 @@ const ActivityDetail = () => {
 	const [showEdit, setShowEdit] = useState(false);
 	const [deleteShow, setDeleteShow] = useState(false);
 	const [name, setName] = useState("");
+	const [checkName, setCheckName] = useState("");
 	console.log("nama", name);
 	const [priority, setPriority] = useState("");
 	const [itemList, setItemList] = useState([]);
@@ -95,6 +96,7 @@ const ActivityDetail = () => {
 
 	const handleAddName = (e) => {
 		setName(e.target.value);
+		setCheckName(e.target.value);
 	};
 
 	const handlePriority = (e) => {
@@ -148,7 +150,7 @@ const ActivityDetail = () => {
 
 		await setShow(false);
 		await setAddListStatus(!addListStatus);
-		await setName("");
+		await setCheckName("");
 		getDetailedData();
 	};
 
@@ -379,7 +381,7 @@ const ActivityDetail = () => {
 						</span>
 					</div>
 					<div className="add-item-modal-button mt-3 d-flex justify-content-end">
-						{!!name.length ? (
+						{!!checkName.length ? (
 							<Button data-cy="modal-add-save-button" onClick={handleAddList} variant="primary">
 								Simpan
 							</Button>
