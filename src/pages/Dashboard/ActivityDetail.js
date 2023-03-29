@@ -135,13 +135,13 @@ const ActivityDetail = () => {
 		getDetailedData();
 	};
 
-	const handleCheck = (id) => {
-		setIsChecked(0);
+	const handleCheck = async (id) => {
 		const payload = {
-			is_active: isChecked,
+			is_active: 0,
 		};
 
-		axios.patch(`https://todo.api.devcode.gethired.id/todo-items/${id}`, payload);
+		await axios.patch(`https://todo.api.devcode.gethired.id/todo-items/${id}`, payload);
+		getDetailedData();
 	};
 
 	useEffect(() => {
@@ -342,20 +342,20 @@ const ActivityDetail = () => {
 							<p data-cy="modal-add-priority-title">Priority</p>
 							<div data-cy="modal-add-priority-dropdown">
 								<Form.Select onChange={handlePriority}>
-									<option data-cy="modal-add-priority-item" defaultValue={priority} value="very-high">
-										Very High
+									<option defaultValue={priority} value="very-high">
+										<p data-cy="modal-add-priority-item">Very High</p>
 									</option>
-									<option data-cy="modal-add-priority-item" value="high">
-										High
+									<option value="high">
+										<p data-cy="modal-add-priority-item">High</p>
 									</option>
-									<option data-cy="modal-add-priority-item" value="normal">
-										Medium
+									<option value="normal">
+										<p data-cy="modal-add-priority-item">Medium</p>
 									</option>
-									<option data-cy="modal-add-priority-item" value="low">
-										Low
+									<option value="low">
+										<p data-cy="modal-add-priority-item">Low</p>
 									</option>
-									<option data-cy="modal-add-priority-item" value="very-low">
-										Very Low
+									<option value="very-low">
+										<p data-cy="modal-add-priority-item">Very Low</p>
 									</option>
 								</Form.Select>
 							</div>
