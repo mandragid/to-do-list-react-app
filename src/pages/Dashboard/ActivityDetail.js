@@ -343,19 +343,31 @@ const ActivityDetail = () => {
 							<div data-cy="modal-add-priority-dropdown">
 								<Form.Select onChange={handlePriority}>
 									<option defaultValue={priority} value="very-high">
-										<p data-cy="modal-add-priority-item">Very High</p>
+										<div>
+											<span className="span-option" data-cy="modal-add-priority-item">
+												Very High
+											</span>
+										</div>
 									</option>
 									<option value="high">
-										<p data-cy="modal-add-priority-item">High</p>
+										<span className="span-option" data-cy="modal-add-priority-item">
+											High
+										</span>
 									</option>
 									<option value="normal">
-										<p data-cy="modal-add-priority-item">Medium</p>
+										<span className="span-option" data-cy="modal-add-priority-item">
+											Medium
+										</span>
 									</option>
 									<option value="low">
-										<p data-cy="modal-add-priority-item">Low</p>
+										<span className="span-option" data-cy="modal-add-priority-item">
+											Low
+										</span>
 									</option>
 									<option value="very-low">
-										<p data-cy="modal-add-priority-item">Very Low</p>
+										<span className="span-option" data-cy="modal-add-priority-item">
+											Very Low
+										</span>
 									</option>
 								</Form.Select>
 							</div>
@@ -367,7 +379,7 @@ const ActivityDetail = () => {
 								Simpan
 							</Button>
 						) : (
-							<Button data-cy="modal-add-save-button" onClick={handleAddList} variant="primary">
+							<Button data-cy="modal-add-save-button" onClick={handleAddList} variant="disabled" disabled>
 								Simpan
 							</Button>
 						)}
