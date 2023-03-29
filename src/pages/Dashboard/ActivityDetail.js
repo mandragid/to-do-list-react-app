@@ -272,7 +272,7 @@ const ActivityDetail = () => {
 											</div>
 											<div data-cy="todo-item-priority-indicator" className={item.priority} id="category"></div>
 											<div className="list-name">
-												<p data-cy="todo-title">{item.title}</p>
+												<p data-cy="todo-item-title">{item.title}</p>
 											</div>
 											<div className="list-edit-button">
 												<button data-cy="todo-item-edit-button" onClick={() => handleShowEdit(item.id, item.title)}>
@@ -379,7 +379,7 @@ const ActivityDetail = () => {
 								Simpan
 							</Button>
 						) : (
-							<Button data-cy="modal-add-save-button" onClick={handleAddList} variant="disabled" disabled>
+							<Button data-cy="modal-add-save-button" onClick={handleAddList} variant="primary" disabled>
 								Simpan
 							</Button>
 						)}
