@@ -351,7 +351,7 @@ const ActivityDetail = () => {
 								Simpan
 							</Button>
 						) : (
-							<Button data-cy="modal-add-save-button" onClick={handleAddList} variant="primary" disabled>
+							<Button data-cy="modal-add-save-button" onClick={handleAddList} variant="primary">
 								Simpan
 							</Button>
 						)}
