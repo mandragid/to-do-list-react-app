@@ -109,7 +109,6 @@ const Dashboard = () => {
 										<div className="col-1">
 											<button
 												data-cy="activity-item-delete-button"
-												data-cy="modal-delete"
 												onClick={() => {
 													handleShow(item.id, item.title);
 												}}
@@ -129,7 +128,7 @@ const Dashboard = () => {
 
 			{/* Delete modal */}
 			<Modal show={show} onHide={handleClose}>
-				<div data-cy="todo-modal-delete" className="delete-activity">
+				<div data-cy="modal-delete" className="delete-activity">
 					<div className="image-container">
 						<img data-cy="modal-delete-icon" className="ModalDeleteIcon" src={ModalDeleteIcon} alt="ModalDeleteIcon" />
 					</div>
